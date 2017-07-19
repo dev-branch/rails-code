@@ -1,0 +1,19 @@
+<h1>calc show</h1>
+
+<ul>
+<% @history.each do |line| %>
+  <li><%= line %></li>
+<% end %>
+</ul>
+
+<form action='/calc' method='post'>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token =%>
+  <input type='text' name='problem' />
+  <input type='submit' />
+</form>
+
+<form action='/calc' method='post'>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token =%>
+  <input type="hidden" name="_method" value="delete" />
+  <button>delete</button>
+</form>
