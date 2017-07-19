@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+rails new rails-calc --skip-action-mailer --skip-action-cable --skip-coffee --skip-turbolinks --skip-test --skip-system-test
+git remote add origin https://github.com/dev-branch/rails-calc.git
+rails s
 
-Things you may want to cover:
+- add gems -
+bundle install
 
-* Ruby version
+rails generate rspec:install
+rails generate rspec:model calculator
+rails generate rspec:controller calc
+rails generate rspec:feature calculation
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+rspec
+```
