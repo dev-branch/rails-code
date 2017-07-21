@@ -21,6 +21,10 @@ rspec
 ## Production
 
 ```
+npm i -g yarn
+
+rails assets:clobber
+
 RAILS_ENV=production rails assets:precompile
 
 SECRET_KEY_BASE=44efda518ab1dd8b23b21447697a5f01dee829bf0863b32f1c13cef3905f82b79b4a33796a3a51a5ec9609bd4e05f6899c053a21c6640469262acbdf9c965102
