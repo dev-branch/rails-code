@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('build') {
+    stage('build dev') {
       steps {
         sh '''
           echo "building development docker container image"
@@ -21,6 +21,14 @@ pipeline {
       steps {
         sh '''
           docker system prune -f
+        '''
+      }
+    }
+    stage('build prod') {
+      steps {
+        sh '''
+          echo "building production docker container image"
+          docker build -t azurechyld.azurecr.io/railscalc:v1 --build-arg OPTIONS="--without development test" .
         '''
       }
     }
