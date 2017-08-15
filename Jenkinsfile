@@ -21,5 +21,11 @@ docker build -t chyld/demo3 .
 '''
       }
     }
+    stage('s4') {
+      steps {
+        sh '''docker rmi chyld/demo3
+'''
+      }
+    }
   }
 }
