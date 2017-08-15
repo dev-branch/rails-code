@@ -8,5 +8,18 @@ pipeline {
 '''
       }
     }
+    stage('s2') {
+      steps {
+        sh '''echo "building docker image"
+docker build -t chyld/demo3 .
+'''
+      }
+    }
+    stage('s3') {
+      steps {
+        sh '''docker run --rm -t -e "RAILS_ENV=development" chyld/demo3 rspec
+'''
+      }
+    }
   }
 }
