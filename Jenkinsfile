@@ -10,8 +10,7 @@ pipeline {
     }
     stage('s2') {
       steps {
-        sh
-        '''
+        sh '''
               echo "building docker image"
               docker build -t chyld/demo3 .
         '''
@@ -19,16 +18,14 @@ pipeline {
     }
     stage('s3') {
       steps {
-        sh
-        '''
+        sh '''
           docker run --rm -e "RAILS_ENV=development" chyld/demo3 rspec
         '''
       }
     }
     stage('s4') {
       steps {
-        sh
-        '''
+        sh '''
           # docker rmi chyld/demo3
         '''
       }
