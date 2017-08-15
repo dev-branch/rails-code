@@ -49,4 +49,7 @@ pipeline {
       }
     }
   }
+  environment {
+    ACRPASS = 'RgO=4/sGz2+P=hzYa4qOo6ox8z1L/pRo'
+  }
 }
