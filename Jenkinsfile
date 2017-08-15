@@ -1,34 +1,26 @@
 pipeline {
   agent any
   stages {
-    stage('s1') {
-      steps {
-        sh '''echo hello'''
-        sh '''echo "more"'''
-        sh '''echo "yes"'''
-      }
-    }
-    stage('s2') {
+    stage('build') {
       steps {
         sh '''
-              echo "building docker image"
-              docker build --rm -t chyld/demo3 .
+          echo "building development docker container image"
+          docker build -t chyld/calc .
         '''
       }
     }
-    stage('s3') {
+    stage('test') {
       steps {
         sh '''
-          docker run --rm -e "RAILS_ENV=development" chyld/demo3 rspec
+          echo "running rspec tests"
+          docker run --rm -e "RAILS_ENV=development" chyld/calc rspec
         '''
       }
     }
-    stage('s4') {
+    stage('clean') {
       steps {
         sh '''
-          # docker rmi chyld/demo3
-          # docker system prune -f
-          echo "tests passed!"
+          docker system prune -f
         '''
       }
     }
