@@ -17,7 +17,7 @@ docker build -t chyld/demo3 .
     }
     stage('s3') {
       steps {
-        sh '''docker run --rm -it -e "RAILS_ENV=development" chyld/demo3 rspec
+        sh '''docker run --rm -t -e "RAILS_ENV=development" chyld/demo3 rspec
 '''
       }
     }
