@@ -18,7 +18,7 @@ ENV SECRET_KEY_BASE "44efda518ab1dd8b23b21447697a5f01dee829bf0863b32f1c13cef3905
 RUN npm i -g yarn
 COPY . /usr/src/app
 WORKDIR /usr/src/app
-RUN bundle install
+RUN bundle install --without development test
 RUN rails assets:clobber && rails assets:precompile
 
 EXPOSE 3333
