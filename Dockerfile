@@ -3,10 +3,10 @@ FROM ruby:2.4.1
 RUN gem install rails
 
 RUN cd /usr/local                                                        \
-    && wget https://nodejs.org/dist/v8.2.1/node-v8.2.1-linux-x64.tar.xz  \
-    && tar -xvf node-v8.2.1-linux-x64.tar.xz                             \
-    && mv node-v8.2.1-linux-x64 node                                     \
-    && rm node-v8.2.1-linux-x64.tar.xz
+    && wget https://nodejs.org/dist/v8.3.0/node-v8.3.0-linux-x64.tar.xz  \
+    && tar -xvf node-v8.3.0-linux-x64.tar.xz                             \
+    && mv node-v8.3.0-linux-x64 node                                     \
+    && rm node-v8.3.0-linux-x64.tar.xz
 
 ENV PATH "/usr/local/node/bin:$PATH"
 ENV PORT "3333"
