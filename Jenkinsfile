@@ -32,5 +32,21 @@ pipeline {
         '''
       }
     }
+    stage('docker login') {
+      steps {
+        sh '''
+          echo "login to azure container registry"
+          docker login --username=azurechyld --password=______ azurechyld.azurecr.io
+        '''
+      }
+    }
+    stage('docker push') {
+      steps {
+        sh '''
+          echo "push production docker container image to azure registry"
+          docker push azurechyld.azurecr.io/railscalc:v1
+        '''
+      }
+    }
   }
 }
