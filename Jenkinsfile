@@ -12,7 +12,7 @@ pipeline {
       steps {
         sh '''
               echo "building docker image"
-              docker build -t chyld/demo3 .
+              docker build --rm -t chyld/demo3 .
         '''
       }
     }
@@ -27,6 +27,8 @@ pipeline {
       steps {
         sh '''
           # docker rmi chyld/demo3
+          # docker system prune -f
+          echo "tests passed!"
         '''
       }
     }
