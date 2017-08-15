@@ -4,6 +4,9 @@ pipeline {
     stage('build dev') {
       steps {
         sh '''
+          echo 'eee'
+          echo $EEE
+          echo 'done'
           echo "building development docker container image"
           docker build -t chyld/calc .
         '''
@@ -50,6 +53,19 @@ pipeline {
     }
   }
   environment {
-    ACRPASS = 'RgO=4/sGz2+P=hzYa4qOo6ox8z1L/pRo'
+    AAA = 'bbb'
+    CCC = 'ddd'
+    EEE = credentials('registry_pass')
+  }
+  post {
+    always {
+      echo "always"
+    }
+    success {
+      echo "success"
+    }
+    failure {
+      echo "failure"
+    }
   }
 }
