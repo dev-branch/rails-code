@@ -8,5 +8,12 @@ pipeline {
 '''
       }
     }
+    stage('s2') {
+      steps {
+        sh '''echo "building docker image"
+docker build -t chyld/demo3 .
+'''
+      }
+    }
   }
 }
