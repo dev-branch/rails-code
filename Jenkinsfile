@@ -3,32 +3,34 @@ pipeline {
   stages {
     stage('s1') {
       steps {
-        sh '''echo hello
-
-'''
-        sh '''echo "more"
-'''
-        sh '''echo "yes"
-'''
+        sh '''echo hello'''
+        sh '''echo "more"'''
+        sh '''echo "yes"'''
       }
     }
     stage('s2') {
       steps {
-        sh '''echo "building docker image"
-docker build -t chyld/demo3 .
-'''
+        sh
+        '''
+              echo "building docker image"
+              docker build -t chyld/demo3 .
+        '''
       }
     }
     stage('s3') {
       steps {
-        sh '''docker run --rm -e "RAILS_ENV=development" chyld/demo3 rspec
-'''
+        sh
+        '''
+          docker run --rm -e "RAILS_ENV=development" chyld/demo3 rspec
+        '''
       }
     }
     stage('s4') {
       steps {
-        sh '''# docker rmi chyld/demo3
-'''
+        sh
+        '''
+          # docker rmi chyld/demo3
+        '''
       }
     }
   }
