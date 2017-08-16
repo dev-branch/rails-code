@@ -48,6 +48,23 @@ pipeline {
         '''
       }
     }
+    stage('delete k8s') {
+      steps {
+        sh '''
+          echo "delete kubernetes service and deployment"
+          kubectl delete svc xposure
+          kubectl delete deployment calc-x
+        '''
+      }
+    }
+    stage('deply k8s') {
+      steps {
+        sh '''
+          echo "deploy kubernetes to azure"
+          kubectl create -f deployment.yaml
+        '''
+      }
+    }
   }
   environment {
     ACR_PASS = credentials('ACR_PASS')
