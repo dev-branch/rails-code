@@ -28,7 +28,7 @@ pipeline {
       steps {
         sh '''
           echo "building production docker container image"
-          docker build -t azurechyld.azurecr.io/railscalc:v1 --build-arg OPTIONS="--without development test" .
+          docker build -t azurechyld.azurecr.io/railscalc:v$BUILD_NUMBER --build-arg OPTIONS="--without development test" .
         '''
       }
     }
@@ -44,7 +44,7 @@ pipeline {
       steps {
         sh '''
           echo "push production docker container image to azure registry"
-          docker push azurechyld.azurecr.io/railscalc:$BUILD_NUMBER
+          docker push azurechyld.azurecr.io/railscalc:v$BUILD_NUMBER
         '''
       }
     }
