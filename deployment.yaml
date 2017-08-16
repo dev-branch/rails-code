@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: sweetpotato
-        image: azurechyld.azurecr.io/railscalc:v55
+        image: azurechyld.azurecr.io/railscalc:v56
         ports:
         - containerPort: 3333
 ---
