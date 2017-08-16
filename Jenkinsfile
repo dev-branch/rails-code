@@ -52,6 +52,7 @@ pipeline {
       steps {
         sh '''
           echo "delete kubernetes service and deployment"
+          whoami
           kubectl version
         '''
       }
