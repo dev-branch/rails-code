@@ -39,7 +39,7 @@ pipeline {
       steps {
         sh '''
           echo "login to azure container registry"
-          docker login --username=azurechyld --password=______ azurechyld.azurecr.io
+          docker login --username=azurechyld --password=$EEE azurechyld.azurecr.io
         '''
       }
     }
@@ -55,7 +55,7 @@ pipeline {
   environment {
     AAA = 'bbb'
     CCC = 'ddd'
-    EEE = credentials('registry_pass')
+    EEE = credentials('ACR_PASS')
   }
   post {
     always {
