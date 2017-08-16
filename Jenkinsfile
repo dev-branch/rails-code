@@ -4,13 +4,6 @@ pipeline {
     stage('build dev') {
       steps {
         sh '''
-          echo "begin"
-          echo $BUILD_NUMBER
-          echo $BUILDS_ALL_TIME
-
-          echo ${BUILDS_ALL_TIME}
-          echo ${BUILD_NUMBER}
-          echo "end"
           echo "building development docker container image"
           docker build -t chyld/calc .
         '''
@@ -51,7 +44,7 @@ pipeline {
       steps {
         sh '''
           echo "push production docker container image to azure registry"
-          docker push azurechyld.azurecr.io/railscalc:v1
+          docker push azurechyld.azurecr.io/railscalc:$BUILD_NUMBER
         '''
       }
     }
