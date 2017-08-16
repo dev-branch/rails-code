@@ -4,9 +4,6 @@ pipeline {
     stage('build dev') {
       steps {
         sh '''
-          echo 'eee'
-          echo $EEE
-          echo 'done'
           echo "building development docker container image"
           docker build -t chyld/calc .
         '''
@@ -39,7 +36,7 @@ pipeline {
       steps {
         sh '''
           echo "login to azure container registry"
-          docker login --username=azurechyld --password=$EEE azurechyld.azurecr.io
+          docker login --username=azurechyld --password=$ACR_PASS azurechyld.azurecr.io
         '''
       }
     }
@@ -53,19 +50,18 @@ pipeline {
     }
   }
   environment {
-    AAA = 'bbb'
-    CCC = 'ddd'
-    EEE = credentials('ACR_PASS')
+    ACR_PASS = credentials('ACR_PASS')
   }
   post {
     always {
-      echo "always"
+      echo "pruning docker images from system"
+      sh '''docker system prune -f'''
     }
     success {
-      echo "success"
+      echo "success!"
     }
     failure {
-      echo "failure"
+      echo "failure!"
     }
   }
 }
