@@ -5,9 +5,11 @@ pipeline {
       steps {
         sh '''
           echo "begin"
+          echo $BUILD_NUMBER
           echo $BUILDS_ALL_TIME
-          echo "middle"
+
           echo ${BUILDS_ALL_TIME}
+          echo ${BUILD_NUMBER}
           echo "end"
           echo "building development docker container image"
           docker build -t chyld/calc .
