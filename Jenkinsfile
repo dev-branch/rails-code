@@ -4,6 +4,9 @@ pipeline {
     stage('build dev') {
       steps {
         sh '''
+          echo "begin"
+          echo $BUILDS_ALL_TIME
+          echo "end"
           echo "building development docker container image"
           docker build -t chyld/calc .
         '''
