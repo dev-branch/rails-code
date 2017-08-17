@@ -3,7 +3,17 @@ kind: Deployment
 metadata:
   name: calc-x
 spec:
-  replicas: 2
+  replicas: 7
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      dog: cat
+      meow: woof
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -12,7 +22,8 @@ spec:
     spec:
       containers:
       - name: sweetpotato
-        image: azurechyld.azurecr.io/railscalc:v56
+#        image: azurechyld.azurecr.io/railscalc:v56
+        image: chyld/calc:v2
         ports:
         - containerPort: 3333
 ---
