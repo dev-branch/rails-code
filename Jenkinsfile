@@ -44,6 +44,14 @@ pipeline {
         '''
       }
     }
+    stage('deploy k8s') {
+      steps {
+        sh '''
+          echo "deploy kubernetes to azure"
+          kubectl apply -f deployment.yaml
+        '''
+      }
+    }
   }
   post {
     always {
