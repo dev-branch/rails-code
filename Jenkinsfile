@@ -59,7 +59,7 @@ pipeline {
       sh '''docker system prune -f'''
     }
     success {
-      echo "success-1"
+      echo "success"
     }
     failure {
       echo "failure!"
