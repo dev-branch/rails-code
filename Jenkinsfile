@@ -48,7 +48,7 @@ pipeline {
       steps {
         sh '''
           echo "deploy kubernetes to azure"
-          kubectl apply -f deployment.yaml
+          envsubst < deployment.yml | kubectl apply -f -
         '''
       }
     }

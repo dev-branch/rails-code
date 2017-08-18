@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: sweetpotato
-        image: azurechyld.azurecr.io/calc:v9
+        image: azurechyld.azurecr.io/calc:v$BUILD_NUMBER
         ports:
         - containerPort: 3333
 ---
