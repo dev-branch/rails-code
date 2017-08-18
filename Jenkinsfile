@@ -1,11 +1,14 @@
 pipeline {
   agent any
+    environment {
+    ACR_PASS = credentials('ACR_PASS')
+  }
   stages {
     stage('build dev') {
       steps {
         sh '''
           echo "building development docker container image"
-          docker build -t chyld/calc .
+          docker build -t chyld/calc -f Dockerfile.dev .
         '''
       }
     }
@@ -13,14 +16,7 @@ pipeline {
       steps {
         sh '''
           echo "running rspec tests"
-          docker run --rm -e "RAILS_ENV=development" chyld/calc rspec
-        '''
-      }
-    }
-    stage('clean') {
-      steps {
-        sh '''
-          docker system prune -f
+          docker run --rm chyld/calc rspec
         '''
       }
     }
@@ -28,11 +24,11 @@ pipeline {
       steps {
         sh '''
           echo "building production docker container image"
-          docker build -t azurechyld.azurecr.io/railscalc:v$BUILD_NUMBER --build-arg OPTIONS="--without development test" .
+          docker build -t azurechyld.azurecr.io/calc:v$BUILD_NUMBER -f Dockerfile.prod .
         '''
       }
     }
-    stage('docker login') {
+    stage('registry login') {
       steps {
         sh '''
           echo "login to azure container registry"
@@ -40,25 +36,14 @@ pipeline {
         '''
       }
     }
-    stage('docker push') {
+    stage('registry push') {
       steps {
         sh '''
           echo "push production docker container image to azure registry"
-          docker push azurechyld.azurecr.io/railscalc:v$BUILD_NUMBER
+          docker push azurechyld.azurecr.io/calc:v$BUILD_NUMBER
         '''
       }
     }
-    stage('deploy k8s') {
-      steps {
-        sh '''
-          echo "deploy kubernetes to azure"
-          kubectl apply -f deployment.yaml
-        '''
-      }
-    }
-  }
-  environment {
-    ACR_PASS = credentials('ACR_PASS')
   }
   post {
     always {
