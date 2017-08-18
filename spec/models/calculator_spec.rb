@@ -16,7 +16,7 @@ RSpec.describe Calculator, type: :model do
     it "parses input and displays itself" do
       c = Calculator.new('2 ** 4')
       # binding.pry
-      expect(c.to_s).to eql("2.0 ** 4.0 = 16.0")
+      expect(c.to_s).to eql("2.0 ** 2.0 = 16.0")
     end
   end
 
